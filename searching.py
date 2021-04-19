@@ -33,9 +33,24 @@ def linear_search(sequence,number):
         idx += 1
     return {"positions": indices, "count": count,}
 
+def pattern_search(seq,pattern):
+    indices = set()
+    pattern_size = len(pattern)
+    left_idx, right_idx = 0, pattern_size
+
+    while right_idx < len(seq):
+        if pattern == seq[left_idx:right_idx]:
+            indices.add(left_idx + pattern_size // 2)
+        left_idx += 1
+        right_idx += 1
+    return indices
+
 def main():
-    read_data(file_name="sequential.json", key = "unordered_numbers")
-    linear_search(sequence="unordered_numbers", number=8)
+    seq = read_data(file_name="sequential.json", key = "unordered_numbers")
+    results = linear_search(seq, number=8)
+
+    seq = read_data(file_name="sequential.json", key="dna_sequence")
+    results = pattern_search(seq, pattern="ATG")
     pass
 
 
